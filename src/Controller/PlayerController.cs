@@ -8,10 +8,19 @@ namespace EliminationMode.Controller;
 public static class PlayerController {
     public static void Initialize() {
         PlayerEvent.onFixedUpdate += PlayerController.OnFixedUpdate;
+        PlayerEvent.onFixedUpdateAfter += PlayerController.OnFixedUpdateAfter;
         PlayerEvent.onNewLap += PlayerController.OnNewLap;
     }
 
     public static void OnFixedUpdate(Player player) {
+        bool isEliminated = (bool)player.Get("isEliminated", false);
+
+        if (isEliminated) {
+            player.Set("isWatched", false);
+        }
+    }
+
+    public static void OnFixedUpdateAfter(Player player) {
         List<Player> players = Player.GetPlayersSortedByPosition();
         int amountOfPlayers = players.Count;
         Player firstPlayer = players.First();
@@ -37,6 +46,8 @@ public static class PlayerController {
 
             camera.SetCameraAsSpectatorCamera(true, PixelGameKartCamera.ESpectatorCamType.E_PLAYER_RACE_CAM);
             camera.ChangeTargetPlayer(beforeLastPlayer.uAntPlayer);
+
+            beforeLastPlayer.Set("isWatched", true);
         }
     }
 

@@ -52,6 +52,7 @@ public class EliminationMode: AbstractPlugin {
             this.harmony.PatchAll(typeof(PlayerHUDManager__Update));
             this.harmony.PatchAll(typeof(PTK_MinimapPlayersManager__Update));
             this.harmony.PatchAll(typeof(PTK_MainMenuInputManager__Player_Game_SpectatorSwitchPlayerClicked));
+            this.harmony.PatchAll(typeof(PTK_MarkersSingleAndCoopManager__Update));
 
             // Then, add methods to the SDK actions.
             GameController.Initialize();
