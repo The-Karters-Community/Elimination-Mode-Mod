@@ -50,6 +50,7 @@ public class EliminationMode: AbstractPlugin {
             // Put all methods that should patched by Harmony here.
             this.harmony.PatchAll(typeof(WeaponTargetingController__LookForTargetPlayers));
             this.harmony.PatchAll(typeof(PlayerHUDManager__Update));
+            this.harmony.PatchAll(typeof(PTK_MinimapPlayersManager__Update));
 
             // Then, add methods to the SDK actions.
             GameController.Initialize();
