@@ -1,9 +1,8 @@
-namespace NewModTemplate;
+namespace EliminationMode;
 
 public class ConfigData {
     // General
     public bool isModEnabled;
 
     // Customization
-    //public int myIntegerCustomizationConfig;
 }
