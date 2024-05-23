@@ -17,10 +17,12 @@ public class PlayerHUDManager__Update {
             return;
         }
 
+        // Display the amount of players still alive after current player's position.
         int amountOfPlayersAlive = Player.GetPlayersSortedByPosition().Count - GameController.amountOfEliminatedPlayers;
 
         __instance.playerPosSuffix.text = $"<space=0.1em>/<space=0.1em>{amountOfPlayersAlive}";
 
+        // Hide useless HUD elements when current player is eliminated.
         bool isEliminated = (bool)player.Get("isEliminated", false);
 
         if (isEliminated) {
@@ -30,5 +32,8 @@ public class PlayerHUDManager__Update {
             __instance.heartsPresentParent.gameObject.SetActive(false);
             __instance.playersScoreParent.gameObject.SetActive(false);
         }
+
+        // Display correct amount of required laps.
+        __instance.iLastVisibleLapCount = Game.Get().GetAmountOfLaps();
     }
 }
