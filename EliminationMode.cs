@@ -1,30 +1,33 @@
 ﻿using BepInEx;
 using BepInEx.Configuration;
-using NewModTemplate.Core;
+using EliminationMode.Controller;
+using EliminationMode.Core;
+using TheKarters2Mods;
 using TheKartersModdingAssistant;
-using TheKartersModdingAssistant.Event;
 
-namespace NewModTemplate;
+namespace EliminationMode;
 
 [BepInPlugin(MyPluginInfo.PLUGIN_GUID, MyPluginInfo.PLUGIN_NAME, MyPluginInfo.PLUGIN_VERSION)]
-public class NewModTemplate: AbstractPlugin {
-    public static NewModTemplate instance;
+[BepInDependency(TheKartersModdingAssistant.MyPluginInfo.PLUGIN_GUID, "0.1.3")]
+[BepInDependency(DisableLeaderboards_BepInExInfo.PLUGIN_GUID, "1.0.0")]
+public class EliminationMode: AbstractPlugin {
+    public static EliminationMode instance;
 
     /// <summary>
     /// Get the plugin instance.
     /// </summary>
     /// 
-    /// <returns>NewModTemplate</returns>
-    public static NewModTemplate Get() {
-        return NewModTemplate.instance;
+    /// <returns>EliminationMode</returns>
+    public static EliminationMode Get() {
+        return EliminationMode.instance;
     }
 
     public ConfigData data = new();
 
     /// <summary>
-    /// NewModTemplate constructor.
+    /// EliminationMode constructor.
     /// </summary>
-    public NewModTemplate(): base() {
+    public EliminationMode(): base() {
         this.pluginGuid = MyPluginInfo.PLUGIN_GUID;
         this.pluginName = MyPluginInfo.PLUGIN_NAME;
         this.pluginVersion = MyPluginInfo.PLUGIN_VERSION;
@@ -32,7 +35,7 @@ public class NewModTemplate: AbstractPlugin {
         this.harmony = new(this.pluginGuid);
         this.logger = new(this.Log);
 
-        NewModTemplate.instance = this;
+        EliminationMode.instance = this;
     }
 
     /// <summary>
@@ -42,15 +45,17 @@ public class NewModTemplate: AbstractPlugin {
         this.BindFromConfig();
 
         if (this.data.isModEnabled) {
-            this.logger.Info($"{this.pluginName} has been enabled.", true);
+            DisableLeaderboardsPlugin.Enable();
 
             // Put all methods that should patched by Harmony here.
-            // Eg:
-            this.harmony.PatchAll(typeof(Ant_CurrentGameConfiguration__Start));
+            this.harmony.PatchAll(typeof(WeaponTargetingController__LookForTargetPlayers));
+            this.harmony.PatchAll(typeof(PlayerHUDManager__Update));
 
             // Then, add methods to the SDK actions.
-            // Eg:
-            GameEvent.onGameStart += () => this.logger.Log("(From action) The game has been started.");
+            GameController.Initialize();
+            PlayerController.Initialize();
+
+            this.logger.Info($"{this.pluginName} has been enabled.", true);
         }
     }
 
@@ -80,13 +85,6 @@ public class NewModTemplate: AbstractPlugin {
     /// Bind customization configurations from the config file.
     /// </summary>
     protected void BindCustomizationConfig() {
-        /*ConfigEntry<int> myIntegerCustomizationConfig = Config.Bind(
-            ConfigCategory.Customization,
-            nameof(myIntegerCustomizationConfig),
-            10,
-            "Whether the mod is enabled."
-        );
-
-        this.data.myIntegerCustomizationConfig = myIntegerCustomizationConfig.Value;*/
+        
     }
 }
