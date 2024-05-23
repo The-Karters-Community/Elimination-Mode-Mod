@@ -29,6 +29,15 @@ public class PTK_TopHudPlayerItem__RefreshItemInfo {
             __instance.playerRacePositionText_playing.text = $"{position} (E)";
 
             __instance.playerRacePositionText_playing.color = Color.red;
+        } else {
+            // Reset and store original color when not eliminated.
+            if (player.Has("originalTopHudTextColor")) {
+                __instance.playerRacePositionText_playing.color = (Color)player.Get("originalTopHudTextColor", null);
+            } else {
+                Color originalColor = __instance.playerRacePositionText_playing.color;
+
+                player.Set("originalTopHudTextColor", originalColor);
+            }
         }
     }
 }
