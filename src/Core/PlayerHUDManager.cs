@@ -17,8 +17,13 @@ public class PlayerHUDManager__Update {
             return;
         }
 
+        // Store the instance into the player.
+        if (!player.Has("PlayerHUDManager")) {
+            player.Set("PlayerHUDManager", __instance);
+        }
+
         // Display the amount of players still alive after current player's position.
-        int amountOfPlayersAlive = Player.GetPlayersSortedByPosition().Count - GameController.amountOfEliminatedPlayers;
+        int amountOfPlayersAlive = Player.GetPlayersSortedByPosition().Count - GameEventHandler.amountOfEliminatedPlayers;
 
         __instance.playerPosSuffix.text = $"<space=0.1em>/<space=0.1em>{amountOfPlayersAlive}";
 

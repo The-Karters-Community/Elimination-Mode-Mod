@@ -1,21 +1,19 @@
-using System;
 using System.Collections.Generic;
-using Cpp2IL.Core.Extensions;
 using TheKartersModdingAssistant;
 using TheKartersModdingAssistant.Event;
 
 namespace EliminationMode.Controller;
 
-public static class GameController {
+public static class GameEventHandler {
     public static int amountOfEliminatedPlayers = 0;
     public static List<Player> playersAtRaceInitialization = new();
 
     public static void Initialize() {
-        GameEvent.onRaceInitialize += GameController.OnRaceInitialize;
+        GameEvent.onRaceInitialize += GameEventHandler.OnRaceInitialize;
     }
 
     public static void OnRaceInitialize() {
-        GameController.amountOfEliminatedPlayers = 0;
+        GameEventHandler.amountOfEliminatedPlayers = 0;
 
         Game.Get().SetAmountOfLaps(Player.GetActivePlayers().Count - 1);
 
