@@ -4,7 +4,7 @@
     <AssemblyName>EliminationMode</AssemblyName>
     <Description>Elimination Mode is a mod that implements the... elimination mode.</Description>
     <Author>Arca</Author>
-    <Version>1.0.1</Version>
+    <Version>1.0.2</Version>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <LangVersion>latest</LangVersion>
 
