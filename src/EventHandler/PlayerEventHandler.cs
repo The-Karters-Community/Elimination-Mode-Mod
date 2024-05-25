@@ -150,7 +150,7 @@ public static class PlayerEventHandler {
             if (player.GetIndex() == eliminatedPlayer.GetIndex()) {
                 content = "You have been eliminated.";
             } else if (PlayerEventHandler.IsLocalMultiplayerRace() && eliminatedPlayer.IsHuman()) {
-                content = $"{eliminatedPlayer.GetName()} ({(int)eliminatedPlayer.uAntPlayer.eAntLocalPlayerNr + 1}) has been eliminated.";
+                content = $"{eliminatedPlayer.GetName()} (P{(int)eliminatedPlayer.uAntPlayer.eAntLocalPlayerNr + 1}) has been eliminated.";
             } else {
                 content = $"{eliminatedPlayer.GetName()} has been eliminated.";
             }
