@@ -6,11 +6,11 @@ namespace EliminationMode.Core;
 
 [HarmonyPatch(typeof(PTK_TopHudPlayerItem), nameof(PTK_TopHudPlayerItem.RefreshItemInfo))]
 public class PTK_TopHudPlayerItem__RefreshItemInfo {
-    public static void Postfix(PTK_TopHudPlayerItem __instance, string _strPlayerName, int _iPlayerRacePositionIndex) {
+    public static void Postfix(PTK_TopHudPlayerItem __instance, int _iPlayerRacePositionIndex) {
         Player player = null;
 
         foreach (Player p in Player.GetActivePlayers()) {
-            if (p.GetName() == _strPlayerName) {
+            if (p.GetPosition() == _iPlayerRacePositionIndex + 1) {
                 player = p;
                 break;
             }
