@@ -57,8 +57,8 @@ public class EliminationMode: AbstractPlugin {
             this.harmony.PatchAll(typeof(PTK_HudWeaponTargetsPreview__Update));
 
             // Then, add methods to the SDK actions.
-            GameController.Initialize();
-            PlayerController.Initialize();
+            GameEventHandler.Initialize();
+            PlayerEventHandler.Initialize(this.logger);
 
             this.logger.Info($"{this.pluginName} has been enabled.", true);
         }
