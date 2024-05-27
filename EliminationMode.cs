@@ -8,7 +8,7 @@ using TheKartersModdingAssistant;
 namespace EliminationMode;
 
 [BepInPlugin(MyPluginInfo.PLUGIN_GUID, MyPluginInfo.PLUGIN_NAME, MyPluginInfo.PLUGIN_VERSION)]
-[BepInDependency(TheKartersModdingAssistant.MyPluginInfo.PLUGIN_GUID, "0.1.3")]
+[BepInDependency(TheKartersModdingAssistant.MyPluginInfo.PLUGIN_GUID, ">=0.1.3")]
 [BepInDependency(DisableLeaderboards_BepInExInfo.PLUGIN_GUID, "1.0.0")]
 public class EliminationMode: AbstractPlugin {
     public static EliminationMode instance;
